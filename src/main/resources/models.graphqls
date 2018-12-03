@@ -1,0 +1,29 @@
+schema {
+   query: Query
+}
+
+type Empregado {
+  id: ID!
+  nome: String!
+  idade: Int!
+  nascimento: Long
+  projetos: [Projeto]!
+}
+
+type Projeto {
+  id: ID!
+  nome: String!
+  codigoServico: Int!
+  responsavel: String!
+  prazo: Long!
+}
+
+type Query {
+  obterEmpregados: [Empregado]!
+  contarEmpregados: Long!
+  obterEmpregadoPorId(id: Long) : Empregado!
+}
+
+type Mutation {
+    novoEmpregado(nome: String!, idade: Int!) : Empregado
+}
