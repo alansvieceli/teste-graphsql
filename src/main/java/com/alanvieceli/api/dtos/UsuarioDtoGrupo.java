@@ -2,18 +2,11 @@ package com.alanvieceli.api.dtos;
 
 import java.util.Optional;
 
-import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
-
-public class GrupoDto {
+public class UsuarioDtoGrupo {
 
 	private Optional<Long> id;
 	private String nome;
-
-	public GrupoDto() {
-
-	}
+	private String email;
 
 	public Optional<Long> getId() {
 		return id;
@@ -23,8 +16,6 @@ public class GrupoDto {
 		this.id = id;
 	}
 
-	@NotEmpty(message = "Nome não pode ser vazio.")
-	@Length(min = 3, max = 200, message = "Nome deve conter entre 3 e 200 caracteres.")
 	public String getNome() {
 		return nome;
 	}
@@ -33,4 +24,11 @@ public class GrupoDto {
 		this.nome = nome;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

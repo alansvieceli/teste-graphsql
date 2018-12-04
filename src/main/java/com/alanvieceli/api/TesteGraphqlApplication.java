@@ -14,6 +14,8 @@ public class TesteGraphqlApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TesteGraphqlApplication.class, args);
 	}
+	
+	/*
 
 	@Bean
 	public Query query(GrupoService grupoService) {
@@ -24,4 +26,6 @@ public class TesteGraphqlApplication {
 	public Mutation mutation(GrupoService grupoService) {
 		return new Mutation(grupoService);
 	}
+	
+	*/
 }

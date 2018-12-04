@@ -1,49 +1,50 @@
 package com.alanvieceli.api.models;
 
-import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "grupo")
-public class Grupo implements Serializable {
+@Table(name = "usuario")
+public class Usuario {
 
-	private static final long serialVersionUID = 1L;
-
-	private Long id;
+	private Long id;	
 	private String nome;
+	private String email;
 	private Date data_criacao;
-	private Date data_atualizacao;	
-	private List<Usuario> usuarios;
-
-	public Grupo() {
-
-	}
-
-	public Grupo(String nome) {
-		this.nome = nome;
+	private Date data_atualizacao;
+	private Grupo grupo;
+	
+	public Usuario() {	
+	
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Column(name = "email", nullable = false)
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Column(name = "nome", nullable = false)
@@ -59,7 +60,7 @@ public class Grupo implements Serializable {
 	public Date getData_criacao() {
 		return data_criacao;
 	}
-	
+
 	public void setData_criacao(Date data_criacao) {
 		this.data_criacao = data_criacao;
 	}
@@ -73,15 +74,15 @@ public class Grupo implements Serializable {
 		this.data_atualizacao = data_atualizacao;
 	}
 
-	@OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-	
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	@ManyToOne(fetch = FetchType.EAGER)
+	public Grupo getGrupo() {
+		return grupo;
 	}
 
+	public void setGrupo(Grupo grupo) {
+		this.grupo = grupo;
+	}
+	
 	@PreUpdate
 	public void preUpdate() {
 		data_atualizacao = new Date();
@@ -110,7 +111,7 @@ public class Grupo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Grupo other = (Grupo) obj;
+		Usuario other = (Usuario) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -118,5 +119,7 @@ public class Grupo implements Serializable {
 			return false;
 		return true;
 	}
+	
+		
 
 }
