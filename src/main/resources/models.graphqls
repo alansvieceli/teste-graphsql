@@ -10,3 +10,8 @@ type Grupo {
 type Query {
 	obteGrupos: [Grupo]!
 }
+
+type Mutation {
+    novoGrupo(nome: String!) : Grupo!
+    deletarGrupo(id: Long!): Boolean!    
+}
