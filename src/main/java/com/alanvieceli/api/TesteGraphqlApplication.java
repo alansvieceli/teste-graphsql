@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import com.alanvieceli.api.graphql.Mutation;
 import com.alanvieceli.api.graphql.Query;
 import com.alanvieceli.api.services.GrupoService;
+import com.alanvieceli.api.services.UsuarioService;
 
 @SpringBootApplication
 public class TesteGraphqlApplication {
@@ -15,17 +16,14 @@ public class TesteGraphqlApplication {
 		SpringApplication.run(TesteGraphqlApplication.class, args);
 	}
 	
-	/*
-
 	@Bean
-	public Query query(GrupoService grupoService) {
-		return new Query(grupoService);
+	public Query query(GrupoService grupoService, UsuarioService usuarioService) {
+		return new Query(grupoService, usuarioService);
 	}
 	
 	@Bean
-	public Mutation mutation(GrupoService grupoService) {
-		return new Mutation(grupoService);
-	}
+	public Mutation mutation(GrupoService grupoService,  UsuarioService usuarioService) {
+		return new Mutation(grupoService, usuarioService);
+	}	
 	
-	*/
 }

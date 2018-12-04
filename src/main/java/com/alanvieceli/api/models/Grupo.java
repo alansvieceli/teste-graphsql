@@ -73,7 +73,7 @@ public class Grupo implements Serializable {
 		this.data_atualizacao = data_atualizacao;
 	}
 
-	@OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "grupo", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}

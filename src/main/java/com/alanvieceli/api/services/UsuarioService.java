@@ -17,7 +17,7 @@ public interface UsuarioService {
 
 	Optional<Usuario> buscarPorId(Long optional);
 	
-	Grupo salvar(Usuario grupo);
+	Usuario salvar(Usuario grupo);
 	
 	void remover(Long id);
 

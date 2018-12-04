@@ -41,7 +41,8 @@ public class GrupoController {
 	private int qtdPorPagina;
 
 	@GetMapping
-	public ResponseEntity<Response<Page<GrupoDtoConsulta>>> listar(@RequestParam(value = "pag", defaultValue = "0") int pag,
+	public ResponseEntity<Response<Page<GrupoDtoConsulta>>> listar(
+			@RequestParam(value = "pag", defaultValue = "0") int pag,
 			@RequestParam(value = "ord", defaultValue = "id") String ord,
 			@RequestParam(value = "dir", defaultValue = "ASC") String dir) {
 
@@ -50,8 +51,10 @@ public class GrupoController {
 		PageRequest pageRequest = PageRequest.of(pag, this.qtdPorPagina, Direction.valueOf(dir), ord);
 
 		Page<Grupo> grupos = this.serv.listarTodos(pageRequest);
-		Page<GrupoDtoConsulta> gruposDto = grupos.map(grupo -> Funcoes.converterGrupoDto(grupo));
-		response.setData(gruposDto);
+		if (grupos != null) {
+			Page<GrupoDtoConsulta> gruposDto = grupos.map(grupo -> Funcoes.converterGrupoDtoConsulta(grupo));
+			response.setData(gruposDto);
+		}
 		return ResponseEntity.ok(response);
 	}
 
@@ -65,15 +68,16 @@ public class GrupoController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		response.setData(Funcoes.converterGrupoDto(grupo.get()));
+		response.setData(Funcoes.converterGrupoDtoConsulta(grupo.get()));
 		return ResponseEntity.ok(response);
 	}
 
 	@PostMapping
-	public ResponseEntity<Response<GrupoDtoConsulta>> cadastrar(@Valid @RequestBody GrupoDtoPersistir grupoDto, BindingResult result) {
+	public ResponseEntity<Response<GrupoDtoConsulta>> cadastrar(@Valid @RequestBody GrupoDtoPersistir grupoDto,
+			BindingResult result) {
 		Response<GrupoDtoConsulta> response = new Response<GrupoDtoConsulta>();
 
-		Grupo grupo = Funcoes.converterDtoPersistirGrupo(serv, grupoDto, result);
+		Grupo grupo = Funcoes.converterDtoPersistirGrupo(grupoDto, result);
 
 		if (result.hasErrors()) {
 			result.getAllErrors().forEach(error -> response.getErrors().add(error.getDefaultMessage()));
@@ -82,7 +86,7 @@ public class GrupoController {
 
 		Grupo grp = this.serv.salvar(grupo);
 
-		response.setData(Funcoes.converterGrupoDto(grp));
+		response.setData(Funcoes.converterGrupoDtoConsulta(grp));
 		return ResponseEntity.ok(response);
 	}
 
@@ -109,7 +113,7 @@ public class GrupoController {
 
 		Grupo grupo = null;
 		if (!result.hasErrors()) {
-			grupo = Funcoes.converterDtoPersistirGrupo(serv, grupoDtoConsulta, result);
+			grupo = Funcoes.converterDtoPersistirGrupo(grupoDtoConsulta, result);
 			grupo.setId(id);
 		}
 
@@ -119,8 +123,8 @@ public class GrupoController {
 		}
 
 		Grupo grp = this.serv.salvar(grupo);
-		response.setData(Funcoes.converterGrupoDto(grp));
+		response.setData(Funcoes.converterGrupoDtoConsulta(grp));
 		return ResponseEntity.ok(response);
-	}	
+	}
 
 }

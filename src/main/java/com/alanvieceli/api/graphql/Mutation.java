@@ -4,14 +4,17 @@ import java.util.Optional;
 
 import com.alanvieceli.api.models.Grupo;
 import com.alanvieceli.api.services.GrupoService;
+import com.alanvieceli.api.services.UsuarioService;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 
 public class Mutation implements GraphQLMutationResolver {
 
 	private GrupoService grupoService;
+	private UsuarioService usuarioService;
 
-	public Mutation(GrupoService grupoService) {
+	public Mutation(GrupoService grupoService, UsuarioService usuarioService) {
 		this.grupoService = grupoService;
+		this.usuarioService = usuarioService;
 	}
 	
 	public Grupo novoGrupo(String nome) {

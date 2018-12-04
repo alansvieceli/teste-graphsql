@@ -2,13 +2,27 @@ schema {
    query: Query
 }
 
+type Usuario {
+  id: ID!
+  nome: String!
+  email: String!
+  data_criacao: String!
+  data_atualizacao: String!
+  grupo: Grupo!
+}
+
 type Grupo {
   id: ID!
   nome: String!
+  data_criacao: String!
+  data_atualizacao: String!
+  usuarios: [Usuario]!
 }
 
 type Query {
 	obteGrupos: [Grupo]!
+	obterGrupoPorId(id: Long!): Grupo!
+	obterUsuarios: [Usuario]!
 }
 
 type Mutation {
