@@ -1,5 +1,6 @@
 package com.alanvieceli.api.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class GrupoServiceImpl implements GrupoService {
 	@Override
 	public void remover(Long id) {
 		this.rep.deleteById(id);		
+	}
+
+	@Override
+	public List<Grupo> listarTodos() {		
+		return this.rep.findAll();
 	}
 
 }

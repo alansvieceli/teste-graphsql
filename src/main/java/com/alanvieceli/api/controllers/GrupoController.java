@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alanvieceli.api.Response;
 import com.alanvieceli.api.dtos.GrupoDto;
 import com.alanvieceli.api.models.Grupo;
+import com.alanvieceli.api.responses.Response;
 import com.alanvieceli.api.services.GrupoService;
 
 @RestController

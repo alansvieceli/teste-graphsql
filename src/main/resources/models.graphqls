@@ -1,0 +1,12 @@
+schema {
+   query: Query
+}
+
+type Grupo {
+  id: ID!
+  nome: String!
+}
+
+type Query {
+	obteGrupos: [Grupo]!
+}
