@@ -36,7 +36,6 @@ public class UsuarioDtoPersistir {
 		this.email = email;
 	}
 	
-	@NotEmpty(message = "Precisa de um código de grupo.")
 	public Long getGrupo_id() {
 		return grupo_id;
 	}
