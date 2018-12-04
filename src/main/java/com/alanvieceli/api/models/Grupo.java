@@ -1,21 +1,17 @@
 package com.alanvieceli.api.models;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "empregado")
-public class Empregado implements Serializable{
+@Table(name = "grupo")
+public class Grupo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -26,23 +22,12 @@ public class Empregado implements Serializable{
 	@Column(name = "nome", nullable = false)
 	private String nome;
 
-	@Column(name = "idade", nullable = false)
-	private Integer idade;
-
-	@Column(name = "nascimento", nullable = false)
-	private Date nascimento;
-
-	@OneToMany(mappedBy = "empregado", fetch = FetchType.EAGER)
-	private List<Projeto> projetos;
-	
-	public Empregado() {
+	public Grupo() {
 		
 	}
 	
-	public Empregado(String nome, Integer idade, Date nascimento) {
+	public Grupo(String nome) {
 		this.nome = nome;
-		this.idade = idade;
-		this.nascimento = nascimento;		
 	}
 
 	public Long getId() {
@@ -61,30 +46,6 @@ public class Empregado implements Serializable{
 		this.nome = nome;
 	}
 
-	public Integer getIdade() {
-		return idade;
-	}
-
-	public void setIdade(Integer idade) {
-		this.idade = idade;
-	}
-
-	public Date getNascimento() {
-		return nascimento;
-	}
-
-	public void setNascimento(Date nascimento) {
-		this.nascimento = nascimento;
-	}
-
-	public List<Projeto> getProjetos() {
-		return projetos;
-	}
-
-	public void setProjetos(List<Projeto> projetos) {
-		this.projetos = projetos;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -101,7 +62,7 @@ public class Empregado implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Empregado other = (Empregado) obj;
+		Grupo other = (Grupo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
